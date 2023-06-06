@@ -25,7 +25,7 @@ function App() {
   const [data, setData] = useState<ApiData | null>()
   useEffect(() => {
     (async function () {
-      fetch(api_url).then(x => x.json()).then(x => setData(x))
+      fetch(api_url).then(x => x.json()).then(x => setData(x)).catch(() => setData(null))
     })()
   }, [])
   if (!data) {
@@ -33,7 +33,7 @@ function App() {
   } else {
     console.log(data)
     return <div>
-      {data.items[0].cameras.map(x => <img src={x.image} />)}
+      {data.items[0].cameras.map(x => <img className="cameraImage" src={x.image} />)}
     </div>
   }
 }
