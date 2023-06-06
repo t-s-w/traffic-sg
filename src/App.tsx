@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const api_url = 'https://api.data.gov.sg/v1/transport/traffic-images';
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+type CameraImage = {
+  timestamp: string,
+  camera_id: number,
+  image_id: number,
+  image: string,
+  image_metadata: { height: number, width: number, md5: string }
+}
+
+type TrafficImages = {
+  timestamp: string,
+  cameras: CameraImage[]
+}
+
+type ApiData = {
+  api_info: { status: string },
+  items: TrafficImages[]
+}
+
+function App() {
+  const [data, setData] = useState<ApiData | null>()
+  useEffect(() => {
+    (async function () {
+      fetch(api_url).then(x => x.json()).then(x => setData(x))
+    })()
+  }, [])
+  if (!data) {
+    return <></>
+  } else {
+    console.log(data)
+    return <div>
+      {data.items[0].cameras.map(x => <img src={x.image} />)}
+    </div>
+  }
 }
 
 export default App
