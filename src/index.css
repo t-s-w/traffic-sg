@@ -76,6 +76,6 @@ button:focus-visible {
 
 #root {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }

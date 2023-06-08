@@ -548,7 +548,20 @@ const tagMappings: Mapping = {
 type SlugTagMap = Record<string, string>
 
 const slugToTag: SlugTagMap = {
-    "SLE": "SLE"
+    "SLE": "SLE",
+    "Changi": "Changi",
+    "TPE": "TPE",
+    "PIE": "PIE",
+    "BKE": "BKE",
+    "KPE": "KPE",
+    "ECP": "ECP",
+    "CTE": "CTE",
+    "AYE": "AYE",
+    "MCE": "MCE",
+    "Sentosa": "Sentosa Gateway",
+    "KJE": "KJE",
+    "Woodlands": "Woodlands Checkpoint",
+    "Tuas": "Tuas Checkpoint"
 }
 
 export { tagMappings, slugToTag }
