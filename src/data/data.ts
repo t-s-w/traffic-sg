@@ -1,30 +1,5 @@
 type Mapping = Record<string, { tags: string[], name: string }>
 
-type CameraImage = {
-    timestamp: string,
-    camera_id: string,
-    location: { latitude: number, longitude: number },
-    image: string,
-    image_metadata: { height: number, width: number, md5: string }
-}
-
-type TrafficImages = {
-    timestamp: string,
-    cameras: CameraImage[]
-}
-
-type ApiData = {
-    api_info: { status: string },
-    items: TrafficImages[]
-}
-
-type SlugParams = {
-    slug: string
-}
-
-
-type SlugTagMap = Record<string, string>
-
 const tagMappings: Mapping = {
     "4703": {
         "tags": [
@@ -133,9 +108,11 @@ const tagMappings: Mapping = {
     }
 }
 
+
+type SlugTagMap = Record<string, string>
+
 const slugToTag: SlugTagMap = {
     "SLE": "SLE"
 }
 
 export { tagMappings, slugToTag }
-export type { CameraImage, TrafficImages, ApiData, SlugParams }

@@ -1,6 +1,6 @@
 import { tagMappings, slugToTag } from '../data/data';
 import { useParams } from 'react-router-dom';
-import type { CameraImage, SlugParams } from '../data/data.ts'
+import type { CameraImage, SlugParams } from '../data/types.ts'
 
 
 export default function CategoryView(props: { cameras: CameraImage[] }) {
