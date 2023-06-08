@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
+import CategoryView from './components/CategoryView'
+import type { ApiData } from './data/data.ts'
 
 const api_url = 'https://api.data.gov.sg/v1/transport/traffic-images';
-
-type CameraImage = {
-  timestamp: string,
-  camera_id: string,
-  location: { latitude: number, longitude: number },
-  image: string,
-  image_metadata: { height: number, width: number, md5: string }
-}
-
-type TrafficImages = {
-  timestamp: string,
-  cameras: CameraImage[]
-}
-
-type ApiData = {
-  api_info: { status: string },
-  items: TrafficImages[]
-}
 
 function App() {
   const [data, setData] = useState<ApiData | null>(null)
@@ -32,9 +16,10 @@ function App() {
   if (!data) {
     return <></>
   } else {
-    console.log(data)
+    const cameras = data.items[0].cameras
     return <Routes>
       <Route path="/" element={data.items[0].cameras.map(x => <div><img className="cameraImage" src={x.image} /><p>{x.camera_id}</p></div>)} />
+      <Route path="/:slug" element={<CategoryView cameras={cameras} />} />
     </Routes>
   }
 }
