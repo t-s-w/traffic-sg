@@ -4,6 +4,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import CategoryView from './components/CategoryView.tsx'
 import type { ApiData } from './data/types.ts'
 import Nav from './components/Nav.tsx'
+import CameraZoom from './components/CameraZoom.tsx'
 
 const api_url = 'https://api.data.gov.sg/v1/transport/traffic-images';
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<><Link to="/SLE">SLE</Link> {cameras.map(x => <div key={x.camera_id}><img className="cameraImage" src={x.image} /><p>{x.camera_id}</p></div>)}</>} />
         <Route path="/:slug" element={<CategoryView cameras={cameras} />} />
+        <Route path="/camera/:cameraId" element={<CameraZoom cameras={cameras} />} />
       </Routes>
     </>
   }
