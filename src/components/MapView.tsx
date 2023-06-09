@@ -2,6 +2,8 @@ import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import { useEffect } from 'react';
 import { CameraImage } from '../data/types.ts'
+import "leaflet/dist/images/marker-icon.png";
+import "leaflet/dist/images/marker-shadow.png";
 
 const mapOptions = {
     scrollWheelZoom: false,
