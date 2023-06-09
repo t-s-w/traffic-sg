@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import CategoryView from './components/CategoryView.tsx'
 import type { ApiData } from './data/types.ts'
 import Nav from './components/Nav.tsx'
-import CameraZoom from './components/CameraZoom.tsx'
+import CameraZoom from './components/CameraZoom'
 
 const api_url = 'https://api.data.gov.sg/v1/transport/traffic-images';
 
