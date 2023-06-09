@@ -46,6 +46,6 @@ export default function MapView(props: { cameras: CameraImage[], setSelectedCame
             marker.addTo(map)
         })
         map.addEventListener('click', () => setSelectedCamera(''))
-    }, [cameras])
+    }, [cameras, setSelectedCamera])
     return cameras.length ? <div id="map"></div> : <div id="map" style={{ display: 'none' }}></div>
 }

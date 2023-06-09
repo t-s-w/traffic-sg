@@ -4,11 +4,14 @@ import type { CameraImage, SlugParams } from '../data/types.ts'
 import Camera from './Camera.tsx'
 import './style.css'
 import MapView from './MapView.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function CategoryView(props: { cameras: CameraImage[] }) {
     const { slug } = useParams<SlugParams>();
     const [selectedCamera, setSelectedCamera] = useState('');
+    useEffect(() => {
+        setSelectedCamera('');
+    }, [slug])
 
     function testSelected(cameraId: string) {
         if (selectedCamera) {
