@@ -12,3 +12,28 @@
     background: #aaa;
     border-radius: 10px;
 }
+
+
+.cameraContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    margin: 10px;
+}
+
+.cameraImage {
+    width: 100%;
+}
+
+.cameraLabel {
+    font-weight: bold;
+}
+
+.cameraSetContainer {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

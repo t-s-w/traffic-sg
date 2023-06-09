@@ -1,6 +1,8 @@
 import { tagMappings, slugToTag } from '../data/data';
 import { useParams } from 'react-router-dom';
 import type { CameraImage, SlugParams } from '../data/types.ts'
+import Camera from './Camera.tsx'
+import './style.css'
 
 
 export default function CategoryView(props: { cameras: CameraImage[] }) {
@@ -11,5 +13,5 @@ export default function CategoryView(props: { cameras: CameraImage[] }) {
     const tag = slugToTag[slug];
     const cameraList = props.cameras.filter((x: CameraImage) => tagMappings[x.camera_id]?.tags.includes(tag))
     console.log(cameraList)
-    return <>{cameraList.map((x: CameraImage) => <div key={x.camera_id}><img className="cameraImage" src={x.image} /><p>{x.camera_id}</p></div>)}</>
+    return <div className="cameraSetContainer">{cameraList.map((x: CameraImage) => <Camera camera={x} />)}</div>
 }
