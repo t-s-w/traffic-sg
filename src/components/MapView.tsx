@@ -15,6 +15,7 @@ export default function MapView(props: { cameras: CameraImage[] }) {
     useEffect(() => {
         const container = L.DomUtil.get('map');
         if (container !== null) {
+            // @ts-expect-error: leaflet DomUtil.get return type does not include _leaflet_id
             container._leaflet_id = null;
         }
         const map = L.map('map', mapOptions).setView([1.3521, 103.8198], 11);
