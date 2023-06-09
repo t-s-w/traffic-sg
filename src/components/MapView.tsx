@@ -2,6 +2,21 @@ import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
 import { useEffect } from 'react';
 import { CameraImage } from '../data/types.ts'
+import iconRetinaUrl from '../assets/marker-icon-2x.png';
+import iconUrl from '../assets/marker-icon.png';
+import shadowUrl from '../assets/marker-shadow.png';
+
+const markerIcon = new L.Icon({
+    iconRetinaUrl,
+    iconUrl,
+    shadowUrl,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41]
+})
+
 
 const mapOptions = {
     scrollWheelZoom: false,
@@ -26,7 +41,7 @@ export default function MapView(props: { cameras: CameraImage[] }) {
             maxZoom: 18
         }).addTo(map);
         cameras.forEach(x => {
-            L.marker([x.location.latitude, x.location.longitude]).addTo(map);
+            L.marker([x.location.latitude, x.location.longitude], { icon: markerIcon }).addTo(map);
         })
     }, [cameras])
     return cameras.length ? <div id="map"></div> : <div id="map" style={{ display: 'none' }}></div>
