@@ -22,7 +22,7 @@ function App() {
     return <>
       <Nav />
       <Routes>
-        <Route path="/" element={<p>Click one of the above links to view the traffic conditions along a specific highway.</p>} />
+        <Route path="/" element={<><h1 className="title">traffic sg</h1><p>Click one of the above links to view the traffic conditions along a specific highway.</p></>} />
         <Route path="/:slug" element={<CategoryView cameras={cameras} />} />
         <Route path="/camera/:cameraId" element={<CameraZoom cameras={cameras} />} />
       </Routes>
