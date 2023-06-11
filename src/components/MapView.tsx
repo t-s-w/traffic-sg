@@ -6,6 +6,11 @@ import iconRetinaUrl from '../assets/marker-icon-2x.png';
 import iconUrl from '../assets/marker-icon.png';
 import shadowUrl from '../assets/marker-shadow.png';
 
+const longRatio = 0.43910932 / 650;
+const latRatio = 0.25291032 / 400;
+const divHeight = 400;
+const divWidth = 650;
+
 const markerIcon = new L.Icon({
     iconRetinaUrl,
     iconUrl,
@@ -33,7 +38,27 @@ export default function MapView(props: { cameras: CameraImage[], setSelectedCame
             // @ts-expect-error: leaflet DomUtil.get return type does not include _leaflet_id
             container._leaflet_id = null;
         }
-        const map = L.map('map', mapOptions).setView([1.3521, 103.8198], 11);
+
+        const bounds = [-Infinity, Infinity, -Infinity, Infinity]
+        for (const cam of cameras) {
+            const { latitude, longitude } = cam.location
+            const [north, south, east, west] = bounds
+            bounds[0] = north < latitude ? latitude : north;
+            bounds[1] = south > latitude ? latitude : south;
+            bounds[2] = east < longitude ? longitude : east;
+            bounds[3] = west > longitude ? longitude : west;
+        }
+        const centre: [number, number] = [(bounds[0] + bounds[1]) / 2, (bounds[2] + bounds[3]) / 2]
+        let [height, width] = [bounds[0] - bounds[1], bounds[2] - bounds[3]]
+        console.log(width, height)
+        let zoomLevel = 11;
+        while (width * 2 < divWidth * longRatio && (height * 2 < divHeight * latRatio) && (zoomLevel < 15)) {
+            width *= 2;
+            height *= 2;
+            zoomLevel += 1;
+            console.log(width, height);
+        }
+        const map = L.map('map', mapOptions).setView(centre, zoomLevel);
         L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
             attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             subdomains: 'abcd',
