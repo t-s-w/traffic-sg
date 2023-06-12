@@ -1,16 +1,33 @@
+:root {
+    --nav-link-bg: rgba(80,80,80,0.7);
+    --nav-link-text: #ccc;
+}
+
 .navBar {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    margin: 5% auto 3% auto;
+    margin: 0 auto 3% auto;
+    justify-content:center;
+}
+
+.info {
+    font-size:13px;
 }
 
 .navLink {
     padding: 10px;
-    margin: 0 3px;
-    background: #aaa;
+    margin: 3px;
+    background: var(--nav-link-bg);
     border-radius: 10px;
+    text-decoration:inherit;
+    font-weight:bold;
+    color:var(--nav-link-text);
+}
+
+.navLink:hover {
+    color:#fff;
 }
 
 
@@ -18,7 +35,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
     margin: 10px;
 }
 
@@ -53,11 +70,8 @@
 
 #map {
     height: 400px;
-    width: 650px;
-}
-
-.leaflet-default-icon-path {
-    background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png);
+    width: 100%;
+    max-width:650px;
 }
 
 .unselected {

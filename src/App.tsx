@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import CategoryView from './components/CategoryView.tsx'
 import type { ApiData } from './data/types.ts'

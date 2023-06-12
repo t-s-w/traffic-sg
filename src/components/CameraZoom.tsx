@@ -1,5 +1,6 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { CameraImage } from '../data/types.ts';
+import { tagMappings } from '../data/data.ts'
 import './style.css';
 
 export default function CameraZoom(props: { cameras: CameraImage[] }) {
@@ -14,9 +15,12 @@ export default function CameraZoom(props: { cameras: CameraImage[] }) {
         return <h1> Error! Camera ID not found </h1>
     }
     return <div className="cameraDetails">
+        <h2>{tagMappings[cameraId].name}</h2>
+        <Link to="#" onClick={(evt) => {evt.preventDefault; navigate(-1)}}>
         <img src={camera.image} className="cameraImage" />
+        </Link>
         <p><span className="infoLabel">Time of capture: </span>{camera.timestamp}</p>
         <p><span className="infoLabel">Geo coordinates: </span>{`[${camera.location.latitude} ${camera.location.longitude}]`}</p>
-        <button onClick={() => navigate(-1)}>Back</button>
+        <Link to="#" className="navLink" onClick={(evt) => {evt.preventDefault; navigate(-1)}}>Back</Link>
     </div>
 }

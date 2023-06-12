@@ -32,6 +32,10 @@ export default function CategoryView(props: { cameras: CameraImage[] }) {
     }
     const cameraList = props.cameras.filter((x: CameraImage) => tagMappings[x.camera_id]?.tags.includes(tag))
 
-    return <><MapView cameras={cameraList} setSelectedCamera={setSelectedCamera} /><div className="cameraSetContainer">{cameraList.map((x: CameraImage) => <Camera key={x.camera_id} camera={x} unselected={testSelected(x.camera_id)} />)}</div>
+    return <>
+    <MapView cameras={cameraList} setSelectedCamera={setSelectedCamera} />
+    <p className="info">Click on markers on the map to highlight the camera at that location.<br />
+    Click on individual cameras to zoom in and get more details.</p>
+    <div className="cameraSetContainer">{cameraList.map((x: CameraImage) => <Camera key={x.camera_id} camera={x} unselected={testSelected(x.camera_id)} />)}</div>
     </>
 }
