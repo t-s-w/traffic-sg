@@ -1,6 +1,7 @@
 :root {
     --nav-link-bg: rgba(80,80,80,0.7);
     --nav-link-text: #ccc;
+    --leaflet-tile-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
 }
 
 .navBar {
@@ -22,7 +23,7 @@ a {
 }
 
 .navLink {
-    padding: 10px;
+    padding: 8px;
     margin: 3px;
     background: var(--nav-link-bg);
     border-radius: 10px;
@@ -94,5 +95,25 @@ a:hover {
     }
     .cameraLabel {
         font-size: 13px;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    a:hover {
+        color:#666;
+    }
+
+    .navLink:hover {
+        color:#EEE;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .leaflet-tile {
+        filter: var(--leaflet-tile-filter, none);
+    }
+
+    .leaflet-container {
+        background: #303030;
     }
 }

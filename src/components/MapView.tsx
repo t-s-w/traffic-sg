@@ -1,6 +1,6 @@
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CameraImage } from '../data/types.ts'
 import iconRetinaUrl from '../assets/marker-icon-2x.png';
 import iconUrl from '../assets/marker-icon.png';
@@ -31,6 +31,9 @@ const mapOptions = {
 }
 
 export default function MapView(props: { cameras: CameraImage[], setSelectedCamera: React.Dispatch<React.SetStateAction<string>> }) {
+    const [darkMode, setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
+    window.matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', () => setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches));
     const { cameras, setSelectedCamera } = props;
     useEffect(() => {
         const container = L.DomUtil.get('map');
@@ -62,8 +65,10 @@ export default function MapView(props: { cameras: CameraImage[], setSelectedCame
             console.log(width, height);
         }
         const map = L.map('map',mapOptions).setView(centre, zoomLevel);
-        L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        console.log(darkMode)
+        L.tileLayer(darkMode ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png' : 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
+            attribution: darkMode ? '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' :
+            'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             subdomains: 'abcd',
             minZoom: 0,
             maxZoom: 18
@@ -74,6 +79,6 @@ export default function MapView(props: { cameras: CameraImage[], setSelectedCame
             marker.addTo(map)
         })
         map.addEventListener('click', () => setSelectedCamera(''))
-    }, [cameras, setSelectedCamera])
+    }, [cameras, setSelectedCamera, darkMode])
     return cameras.length ? <div id="map"></div> : <div id="map" style={{ display: 'none' }}></div>
 }
