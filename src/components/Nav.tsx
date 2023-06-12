@@ -5,7 +5,7 @@ import './style.css';
 export default function Nav() {
     const navElements = []
     for (const slug in slugToTag) {
-        navElements.push(<Link className="navLink" to={"/" + slug}>{slugToTag[slug]}</Link>)
+        navElements.push(<Link key={slug} className="navLink" to={"/" + slug}>{slugToTag[slug]}</Link>)
     }
     return <div className="navBar">{navElements}</div>
 }

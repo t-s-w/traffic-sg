@@ -33,11 +33,10 @@ const mapOptions = {
 export default function MapView(props: { cameras: CameraImage[], setSelectedCamera: React.Dispatch<React.SetStateAction<string>> }) {
     const [darkMode, setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches)
     window.matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', () => setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches));
+        .addEventListener('change', () => setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches));
     const { cameras, setSelectedCamera } = props;
     useEffect(() => {
         const container = L.DomUtil.get('map');
-        console.log(container);
         if (container !== null) {
             // @ts-expect-error: leaflet DomUtil.get return type does not include _leaflet_id
             container._leaflet_id = null;
@@ -56,19 +55,17 @@ export default function MapView(props: { cameras: CameraImage[], setSelectedCame
         }
         const centre: [number, number] = [(bounds[0] + bounds[1]) / 2, (bounds[2] + bounds[3]) / 2]
         let [height, width] = [bounds[0] - bounds[1], bounds[2] - bounds[3]]
-        console.log(width, height)
         let zoomLevel = 11;
         while (width * 2 < divWidth * longRatio && (height * 2 < divHeight * latRatio) && (zoomLevel < 14)) {
             width *= 2;
             height *= 2;
             zoomLevel += 1;
-            console.log(width, height);
         }
-        const map = L.map('map',mapOptions).setView(centre, zoomLevel);
+        const map = L.map('map', mapOptions).setView(centre, zoomLevel);
         console.log(darkMode)
         L.tileLayer(darkMode ? 'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png' : 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.png', {
             attribution: darkMode ? '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors' :
-            'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             subdomains: 'abcd',
             minZoom: 0,
             maxZoom: 18
