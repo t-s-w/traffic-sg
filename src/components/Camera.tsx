@@ -7,7 +7,8 @@ export default function Camera(props: { camera: CameraImage, unselected: boolean
     const { camera, unselected = false } = props
 
     return <div className={unselected ? "cameraContainer unselected" : "cameraContainer"}>
-        <Link to={"/camera/" + camera.camera_id}><img src={camera.image} className="cameraImage" /></Link>
-        <span className="cameraLabel">{tagMappings[camera.camera_id].name}</span>
+        <Link to={"/camera/" + camera.camera_id}><img src={camera.image} className="cameraImage" /><br />
+        <span className="cameraLabel">{tagMappings[camera.camera_id].name}</span></Link>
+        
     </div>
 }
