@@ -10,6 +10,10 @@ Click to access: https://traffic-sg.vercel.app
 * HTML & CSS: Used to style the page and make it responsive to mobile screens as well, with functioning light & dark modes.
 * Vite: Development environment for the application.
 
+## API
+
+LTA Traffic data API: https://data.gov.sg/dataset/traffic-images
+
 ## User stories & Use cases
 
 * A user planning their route may want an application to have a quick glance at traffic conditions along an expressway before choosing whether to use that expressway as part of their route or to avoid it by using a different road.
