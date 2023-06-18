@@ -106,6 +106,10 @@ a:hover {
     .cameraLabel {
         font-size: 13px;
     }
+
+    #map {
+        height: 300px;
+    }
 }
 
 @media (prefers-color-scheme: light) {
